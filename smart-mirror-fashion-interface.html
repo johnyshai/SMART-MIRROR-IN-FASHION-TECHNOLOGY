@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Mirror Fashion Technology</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            overflow: hidden;
+        }
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+        }
+        .title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ccc;
+        }
+        .datetime {
+            font-size: 18px;
+        }
+        .weather {
+            display: flex;
+            align-items: center;
+        }
+        .temp {
+            font-size: 18px;
+            color: #3498db;
+            margin-right: 10px;
+        }
+        .humidity {
+            font-size: 16px;
+            color: #ccc;
+        }
+        .status-dots {
+            display: flex;
+        }
+        .dot {
+            width: 12px;
+            height: 12px;
+            background-color: #2ecc71;
+            border-radius: 50%;
+            margin-left: 5px;
+        }
+        .main-content {
+            display: flex;
+            flex: 1;
+            justify-content: space-between;
+        }
+        .left-panel {
+            width: 25%;
+        }
+        .selection-label {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .garment-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .garment-btn {
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #333;
+        }
+        .garment-btn.active {
+            background-color: #3498db;
+        }
+        .central-display {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .silhouette {
+            width: 120px;
+            height: 400px;
+            background-color: #555;
+            position: relative;
+        }
+        .silhouette::before {
+            content: "";
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #555;
+            top: -90px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .right-panel {
+            width: 25%;
+        }
+        .measurements-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        .measurements-list {
+            padding-left: 0;
+            list-style-type: none;
+        }
+        .measurements-list li {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .size-recommendation {
+            color: #3498db;
+            font-size: 16px;
+            margin-top: 15px;
+        }
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .status-box {
+            padding: 10px;
+            background-color: #333;
+            border-radius: 5px;
+            width: 30%;
+            font-size: 14px;
+        }
+        .status-box.alert {
+            background-color: #c0392b;
+        }
+        .system-status {
+            display: flex;
+            flex-direction: column;
+            width: 30%;
+            font-size: 14px;
+        }
+        .system-status .status-item {
+            margin-bottom: 5px;
+            color: #2ecc71;
+        }
+        .sensor-status {
+            display: flex;
+            flex-direction: column;
+            width: 30%;
+            font-size: 14px;
+        }
+        .sensor-status .status-item {
+            margin-bottom: 5px;
+            color: #2ecc71;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="title">Smart Mirror Fashion Technology</div>
+            <div class="datetime">
+                <span id="time">15:42:37</span>
+                <span id="date">23 April 2025</span>
+            </div>
+            <div class="weather">
+                <div class="temp">24°</div>
+                <div class="humidity">48% RH</div>
+            </div>
+            <div class="status-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="left-panel">
+                <div class="selection-label">SELECT GARMENT</div>
+                <div class="garment-buttons">
+                    <div class="garment-btn active" id="tshirt">T-Shirt</div>
+                    <div class="garment-btn" id="shirt">Shirt</div>
+                    <div class="garment-btn" id="jacket">Jacket</div>
+                    <div class="garment-btn" id="pants">Pants</div>
+                </div>
+            </div>
+
+            <div class="central-display">
+                <div class="silhouette"></div>
+            </div>
+
+            <div class="right-panel">
+                <div class="measurements-title">MEASUREMENTS</div>
+                <ul class="measurements-list">
+                    <li>Shoulder: 42 cm</li>
+                    <li>Chest: 94 cm</li>
+                    <li>Waist: 82 cm</li>
+                    <li>Height: 175 cm</li>
+                </ul>
+                <div class="size-recommendation">Size Recommendation: M</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="status-box alert">Motion Detected</div>
+            <div class="status-box">Distance: 28.4 cm</div>
+            <div class="system-status">
+                <div class="status-item">System: Online</div>
+                <div class="status-item">Camera: Active</div>
+                <div class="status-item">Sensors: All operational</div>
+            </div>
+            <div class="sensor-status">
+                <div class="status-item">PIR: Motion detected</div>
+                <div class="status-item">IR: Gesture detected</div>
+                <div class="status-item">Network: Connected</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Update time and date
+        function updateDateTime() {
+            const now = new Date();
+            let hours = now.getHours().toString().padStart(2, '0');
+            let minutes = now.getMinutes().toString().padStart(2, '0');
+            let seconds = now.getSeconds().toString().padStart(2, '0');
+            
+            const timeStr = `${hours}:${minutes}:${seconds}`;
+            
+            const day = now.getDate();
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 
+                                'July', 'August', 'September', 'October', 'November', 'December'];
+            const month = monthNames[now.getMonth()];
+            const year = now.getFullYear();
+            
+            const dateStr = `${day} ${month} ${year}`;
+            
+            document.getElementById('time').textContent = timeStr;
+            document.getElementById('date').textContent = dateStr;
+        }
+        
+        // Update time every second
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+        
+        // Garment selection functionality
+        const garmentButtons = document.querySelectorAll('.garment-btn');
+        
+        garmentButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                garmentButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+            });
+        });
+        
+        // Simulate motion detection
+        function simulateMotion() {
+            const motionBox = document.querySelector('.status-box.alert');
+            const opacity = Math.sin(Date.now() / 500) * 0.3 + 0.7;
+            motionBox.style.opacity = opacity;
+        }
+        
+        setInterval(simulateMotion, 100);
+    </script>
+</body>
+</html>
